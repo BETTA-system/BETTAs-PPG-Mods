@@ -1,0 +1,18 @@
+{
+  "Name": "Anything invisible (Upgraded)",
+  "Author": "BETTA.system",
+  "Description": "Adds a way to make items invisible without breaking the detail view. It also automatically fixes the items that would normally break detail view",
+  "ModVersion": "2.1",
+  "GameVersion": "1.27",
+  "ThumbnailPath": "Thumbnail.png",
+  "EntryPoint": "Mod.Mod",
+  "Tags": [
+    "Utility"
+  ],
+  "Scripts": [
+    "Script.cs"
+  ],
+  "Active": true,
+  "UGCIdentity": null,
+  "CreatorUGCIdentity": "3103563100"
+}
