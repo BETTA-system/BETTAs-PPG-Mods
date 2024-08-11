@@ -1,0 +1,18 @@
+{
+  "Name": "Toggle activation delay",
+  "Author": "BETTA.system",
+  "Description": "Adds 2 context menu buttons for toggling activation delay. Works with activation wires (obviously)",
+  "ModVersion": "1.28",
+  "GameVersion": "1.27",
+  "ThumbnailPath": "Thumbnail.png",
+  "EntryPoint": "Mod.Mod",
+  "Tags": [
+    "Utility"
+  ],
+  "Scripts": [
+    "Script.cs"
+  ],
+  "Active": true,
+  "UGCIdentity": null,
+  "CreatorUGCIdentity": "3080851517"
+}
