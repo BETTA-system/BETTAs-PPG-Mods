@@ -15,15 +15,33 @@ namespace Mod
                 foreach (PhysicalBehaviour pb in pbs)
                 {
                     ContextMenuButton[] Buttons = {
-                        new ContextMenuButton("setActivationDelay", "Set Activation Delay", "Set activation delay in seconds", new UnityAction[]
+                        new ContextMenuButton("setActivationDelayToZero", "Set Activation Delay to 0", "Set the activation delay of the object to 0", new UnityAction[]
                         {
                             delegate()
                             {
-                                ShowDelayInputDialog(pb);
+                                pb.ActivationPropagationDelay = 0f;
+
+                                string objectName = pb.gameObject.name;
+
+                                ModAPI.Notify($"Activation delay set to 0 for {objectName}");
                             }
                         })
                         {
-                            LabelWhenMultipleAreSelected = "Set Activation Delay"
+                            LabelWhenMultipleAreSelected = "Set Activation Delay to 0"
+                        },
+                        new ContextMenuButton("setActivationDelayToDefault", "Set Activation Delay to Default", "Set the activation delay of the object to default", new UnityAction[]
+                        {
+                            delegate()
+                            {
+                                pb.ActivationPropagationDelay = 0.1f;
+
+                                string objectName = pb.gameObject.name;
+
+                                ModAPI.Notify($"Activation delay set to default for {objectName}");
+                            }
+                        })
+                        {
+                            LabelWhenMultipleAreSelected = "Set Activation Delay to Default"
                         }
                     };
 
@@ -31,17 +49,47 @@ namespace Mod
                 }
             };
         }
+    }
+}
 
-        private static void ShowDelayInputDialog(PhysicalBehaviour pb)
+//If you want just 1 button for toggling between 0 and default you can use this code instead (just remove /* and */ at start and end, also delete the code above):
+
+/*using System;
+using UnityEngine;
+using UnityEngine.Events;
+
+namespace Mod
+{
+    public class Mod
+    {
+        public static void Main()
         {
-            float currentDelay = pb.ActivationPropagationDelay;
-
-            Utils.OpenFloatInputDialog<PhysicalBehaviour>(currentDelay, pb, delegate(PhysicalBehaviour phys, float delay)
+            ModAPI.OnItemSpawned += (sender, args) =>
             {
-                phys.ActivationPropagationDelay = delay;
-                string objectName = phys.gameObject.name;
-                ModAPI.Notify($"Activation delay set to {delay} for {objectName}");
-            }, "Set Activation Delay", "delay in seconds");
+                PhysicalBehaviour[] pbs = args.Instance.GetComponentsInChildren<PhysicalBehaviour>();
+
+                foreach (PhysicalBehaviour pb in pbs)
+                {
+                    ContextMenuButton[] Buttons = {
+                        new ContextMenuButton("toggleActivationDelay", "Toggle Activation Delay", "Toggle the activation delay of the object", new UnityAction[]
+                        {
+                            delegate()
+                            {
+                                float newDelay = Mathf.Approximately(pb.ActivationPropagationDelay, 0.1f) ? 0f : 0.1f;
+                                pb.ActivationPropagationDelay = newDelay;
+
+                                ModAPI.Notify("Toggled activation delay");
+                            }
+                        })
+                        {
+                            LabelWhenMultipleAreSelected = "Toggle Activation Delay"
+                        }
+                    };
+
+                    pb.ContextMenuOptions.Buttons.AddRange(Buttons);
+                }
+            };
         }
     }
 }
+*/
